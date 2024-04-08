@@ -21,9 +21,9 @@ int main()
     for(int a=1;a<=6;a++)
     {
         sum+=W[a]/K+1+M[a]/K+1;
-        if(W[a]%2==0)
+        if(W[a]%K==0)
             sum--;
-        if(M[a]%2==0)
+        if(M[a]%K==0)
             sum--;
     }
     printf("%d",sum);
