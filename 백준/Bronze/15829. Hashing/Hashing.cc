@@ -7,11 +7,11 @@ int main()
     int n;
     long long sum=0;
     scanf("%d",&n);
-    char a[51];
+    char a[55];
     scanf("%s",a);
     for(int j=0;j<n;j++)
     {
-        int now=a[j]-96;
+        long long now=a[j]-96;
         for(int p=0;p<j;p++)
         {
             now*=31;
@@ -19,6 +19,7 @@ int main()
         }
         sum+=now;
     }
+    sum%=1234567891;
     printf("%lld",sum);
     return 0;
 }
