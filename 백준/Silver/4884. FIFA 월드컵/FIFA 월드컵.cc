@@ -16,12 +16,10 @@ int main()
         {
             long long X=0;
             long long Y=0;
-            int two=0;
             long long sum=1;
             while(sum<G*A+D)
             {
                 sum*=2;
-                two++;
             }
             Y=sum-G*A-D;
             X=G*T*(T-1)/2+sum-1;
