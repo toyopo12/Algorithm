@@ -4,10 +4,10 @@ using namespace std;
 
 typedef struct
 {
-    int a;
-    int b;
-    int c;
-    int count;
+    long long a;
+    long long b;
+    long long c;
+    long long count;
 }hi;
 
 hi good[100010];
@@ -19,36 +19,33 @@ int main()
     cout.tie(NULL);
     long long sum=0;
     int n,m;
-    int arr[100010];
-    cin >> n >> m;
-    for(int i=1;i<=m;i++)
+    int now=0;
+    cin >> n >> m >> now;
+    for(int i=1;i<m;i++)
     {
-        cin >> arr[i];
-    }
-    int now=arr[1];
-    for(int i=1;i<=n-1;i++)
-    {
-        cin >> good[i].a >> good[i].b >> good[i].c;
-    }
-    for(int i=2;i<=m;i++)
-    {
-        if(now<arr[i])
+        int x;
+        cin >> x;
+        if(x>now)
         {
-            for(int j=now;j<arr[i];j++)
-            {
-                good[j].count++;
-            }
+            good[x].count--;
+            good[now].count++;
         }
         else
         {
-            for(int j=now-1;j>=arr[i];j--)
-            {
-                good[j].count++;
-            }
+            good[x].count++;
+            good[now].count--;
         }
-        now=arr[i];
+        now=x;
     }
-    for(int i=1;i<=n-1;i++)
+    for(int i=1;i<n;i++)
+    {
+        cin >> good[i].a >> good[i].b >> good[i].c;
+    }
+    for(int i=1;i<=n;i++)
+    {
+        good[i].count=good[i-1].count+good[i].count;
+    }
+    for(int i=1;i<=n;i++)
     {
         if(good[i].count*good[i].a<good[i].count*good[i].b+good[i].c)
         {
