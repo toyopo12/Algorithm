@@ -1,39 +1,25 @@
 #include <iostream>
 #include <algorithm>
-
-typedef struct
-{
-    int x;
-    int y;
-}point;
+#include <vector>
 
 using namespace std;
 
-bool compare(point a,point b) 
-{
-	if (a.y == b.y) 
-    {		
-		return a.x < b.x;		
-	}
-	else 
-    {						
-		return a.y < b.y;
-	}
+pair<int, int> arr[100001];
+
+bool cmp(pair<int, int> a, pair<int, int> b){
+    if(a.second == b.second) return a.first < b.first;
+    else return a.second < b.second;
 }
 
 int main()
 {
+    ios_base :: sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
     int n;
-    scanf("%d",&n);
-    point hi[100100];
-    for(int i=0;i<n;i++)
-    {
-        scanf("%d %d",&hi[i].x,&hi[i].y);
-    }
-    sort(hi,hi+n,compare);
-    for(int i=0;i<n;i++)
-    {
-        printf("%d %d\n",hi[i].x,hi[i].y);
-    }
+    cin >> n;
+    for(int i = 0; i < n; i++) cin >> arr[i].first >> arr[i].second;
+    sort(arr, arr + n , cmp);
+    for(int i = 0; i < n; i++) cout << arr[i].first << " " << arr[i].second << '\n';
     return 0;
 }
