@@ -1,39 +1,25 @@
 #include <iostream>
-#include <algorithm>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
-string hi[20020];
+string s[20002];
 
-bool compare(string a,string b)
-{
-    if(a.length()==b.length())
-    {
-        return a < b;
-    }
-    else
-    {
-        return a.length() < b.length();
-    }
+bool cmp(string a, string b){
+    if(a.length() == b.length()) return a < b;
+    else return a.length() < b.length();
 }
 
 int main()
 {
-    int N;
-    cin >> N;
-    for(int i=0;i<N;i++)
-    {
-        cin >> hi[i];
-    }
-    sort(hi,hi+N,compare);
-    for(int i=0;i<N;i++)
-    {
-        if(hi[i]==hi[i-1])
-        {
-            continue;
-        }
-        cout << hi[i] << endl;
-    }
+    ios_base :: sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; i++) cin >> s[i];
+    sort(s, s + n, cmp);
+    for(int i = 0; i < n; i++) if(s[i] != s[i + 1]) cout << s[i] << '\n';
     return 0;
 }
