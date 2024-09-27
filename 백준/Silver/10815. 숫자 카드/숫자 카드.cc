@@ -3,25 +3,22 @@
 
 using namespace std;
 
+int numcard[500050];
+
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(NULL);
-    int N;
-    int arr[500500];
-    cin >> N;
-    for(int i=0;i<N;i++)
-    {
-        cin >> arr[i];
-    }
-    sort(arr,arr+N);
-    int M;
-    int brr[500500];
-    cin >> M;
-    for(int i=0;i<M;i++)
-    {
-        cin >> brr[i];
-        cout << binary_search(arr,arr+N,brr[i]) << " ";
+    ios_base ::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int n, m, x;
+    cin >> n;
+    for(int i = 0; i < n; i++) cin >> numcard[i];
+    sort(numcard, numcard + n);
+    cin >> m;
+    for(int i = 0; i < m; i++){
+        cin >> x;
+        if(x == numcard[lower_bound(numcard, numcard + n, x) - numcard] && lower_bound(numcard, numcard + n, x) - numcard < n) cout << "1 ";
+        else cout << "0 ";
     }
     return 0;
 }
