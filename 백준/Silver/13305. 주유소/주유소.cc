@@ -4,9 +4,9 @@ using namespace std;
 
 int good[100010];
 int price[100010];
-int minprice;
-int savegood;
-int goodprice;
+long long minprice;
+long long savegood;
+long long goodprice;
 
 int main()
 {
