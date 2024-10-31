@@ -18,8 +18,8 @@ void bfs()
                 break;
             }
             if(x < k && visited[x * 2] == 0) q.push({x * 2, y + 1});
-            if(visited[x + 1] == 0 && x < k) q.push({x + 1, y + 1});
-            if(visited[x - 1] == 0 && x > 0) q.push({x - 1, y + 1});
+            if(x < k && visited[x + 1] == 0) q.push({x + 1, y + 1});
+            if(x > 0 && visited[x - 1] == 0) q.push({x - 1, y + 1});
         }
         q.pop();
     }
