@@ -2,66 +2,32 @@
 
 using namespace std;
 
-int root[1000010];
+int parent[1000010];
 
-int getroot(int a)
-{
-    if(root[a]==a)
-    {
-        return a;
-    }
-    else
-    {
-        return root[a] = getroot(root[a]);
-    }
+int find(int x) {
+    if(x == parent[x]) return x;
+    else return parent[x] = find(parent[x]);
 }
 
-void unionroot(int a,int b) // 얘가 문제임
-{
-    int x=getroot(a);
-    int y=getroot(b);
-    if(x<y)
-    {
-        root[y]=x;
-    }
-    else
-    {
-        root[x]=y;
-    }
+void uni(int x, int y) {
+    x = find(x);
+    y = find(y);
+    if(x != y) parent[y] = x;
 }
 
-void findroot(int a,int b)
-{
-    if(getroot(a)==getroot(b))
-    {
-        printf("YES\n");
-    }
-    else
-    {
-        printf("NO\n");
-    }
-}
-
-int main()
-{
-    int n,m;
-    scanf("%d %d",&n,&m);
-    for(int i=1;i<=n;i++)
-    {
-        root[i]=i;
-    }
-    for(int i=0;i<m;i++)
-    {
-        int a,b,c;
-        scanf("%d %d %d",&a,&b,&c);
-        if(a==0)
-        {
-            unionroot(b,c);
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int n, m; cin >> n >> m;
+    for(int i = 1; i <= n; i++) parent[i] = i;
+    for(int i = 0; i < m; i++) {
+        int check, a, b; cin >> check >> a >> b;
+        if(check) {
+            if(find(a) == find(b)) cout << "YES\n";
+            else cout << "NO\n";
         }
-        else
-        {
-            findroot(b,c);
-        }
+        else uni(a, b);
     }
     return 0;
 }
