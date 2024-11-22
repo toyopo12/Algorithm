@@ -5,31 +5,28 @@ using namespace std;
 int parent[100010];
 int counting;
 
-int find(int a) {
-    if(parent[a] == a) return a;
-    else return parent[a] = find(parent[a]);
-}
-void uni(int a, int b) {
-    a = find(a);
-    b = find(b);
-    if(a > b) swap(a, b);
-    parent[b] = a;
+int find(int x) {
+    if(x == parent[x]) return x;
+    else return parent[x] = find(parent[x]);
 }
 
-int main()
-{
-    ios_base :: sync_with_stdio(false);
+void uni(int x, int y) {
+    x = find(x);
+    y = find(y);
+    if(x != y) parent[x] = y;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
-    int g, p;
-    cin >> g >> p;
+    int g, p; cin >> g >> p;
     for(int i = 1; i <= g; i++) parent[i] = i;
     for(int i = 0; i < p; i++) {
-        int x;
-        cin >> x;
-        x = find(x);
-        if(x == 0) break;
-        uni(x, x - 1);
+        int fly; cin >> fly;
+        fly = find(fly);
+        if(fly == 0) break;
+        uni(fly, fly - 1);
         counting++;
     }
     cout << counting;
