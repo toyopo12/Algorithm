@@ -1,60 +1,43 @@
 #include <iostream>
-#include <vector>
 #include <queue>
-#include <limits>
-#define pii pair<int, int>
+
 using namespace std;
 
-int d[1010];
-vector<pair<int,int>> arr[1010];
-priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
+#define INF 0x7fffffff
 
-void di()
-{
-    while(!pq.empty())
-    {
-        int x=pq.top().first;
-        int y=pq.top().second;
+vector<pair<int, int>> bus[1010];
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
+int d[1010];
+
+void dijkstra() {
+    while(!pq.empty()) {
+        auto [a, b] = pq.top();
         pq.pop();
-        if(x!=d[y])
-        {
-            continue;
-        }
-        for(int i=0;i<arr[y].size();i++)
-        {
-            int a=arr[y][i].first;
-            int b=arr[y][i].second;
-            if(d[b]>x+a)
-            {
-                d[b]=x+a;
-                pq.push({d[b],b});
+        if(a != d[b]) continue;
+        for(int i = 0; i < bus[b].size(); i++) {
+            auto [x, y] = bus[b][i];
+            if(d[y] > a + x) {
+                d[y] = a + x;
+                pq.push({d[y], y});
             }
         }
     }
 }
 
-int main()
-{
-    ios_base :: sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    int n,m;
-    int start,end;
-    cin >> n >> m;
-    for(int i=0;i<m;i++)
-    {
-        int x,y,cost;
-        cin >> x >> y >> cost;
-        arr[x].push_back({cost,y});
-    }
-    for(int i=1;i<=n;i++)
-    {
-        d[i]=0x7fffffff;
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int start, end, N, M; cin >> N >> M;
+    for(int i = 1; i <= N; i++) d[i] = INF;
+    for(int i = 0; i < M; i++) {
+        int from, to, cost; cin >> from >> to >> cost;
+        bus[from].push_back({cost, to});
     }
     cin >> start >> end;
-    d[start]=0;
-    pq.push({0,start});
-    di();
+    d[start] = 0;
+    pq.push({0, start});
+    dijkstra();
     cout << d[end];
     return 0;
 }
