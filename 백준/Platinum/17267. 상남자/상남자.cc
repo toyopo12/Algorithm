@@ -3,7 +3,7 @@
 
 using namespace std;
 
-char board[1010][1010];
+int board[1010][1010];
 bool visited[1010][1010];
 queue<pair<pair<int, int>, pair<int, int>>> ppq;
 int N, M, L, R;
@@ -17,8 +17,9 @@ int main()
     cin >> N >> M >> L >> R;
     for(int i = 1; i <= N; i++) {
         for(int j = 1; j <= M; j++) {
-            cin >> board[i][j];
-            if(board[i][j] == '2') {
+            char x; cin >> x;
+            board[i][j] = x - '0';
+            if(board[i][j] == 2) {
                 ppq.push({{i, j}, {L, R}});
             }
         }
@@ -31,24 +32,24 @@ int main()
             result++;
             // 위
             for(int k = i; k > 1; k--) {
-                if(visited[k - 1][j] == 0 && board[k - 1][j] == '0') {
+                if(visited[k - 1][j] == 0 && board[k - 1][j] == 0) {
                     ppq.push({{k - 1, j}, {l, r}});
                 }
                 else break;
             }
             // 아래
             for(int k = i; k < N; k++) {
-                if(visited[k + 1][j] == 0 && board[k + 1][j] == '0') {
+                if(visited[k + 1][j] == 0 && board[k + 1][j] == 0) {
                     ppq.push({{k + 1, j}, {l, r}});
                 }
                 else break;
             }
             // 오른쪽
-            if(j < M && visited[i][j + 1] == 0 && r > 0 && board[i][j + 1] == '0') {
+            if(j < M && visited[i][j + 1] == 0 && r > 0 && board[i][j + 1] == 0) {
                 ppq.push({{i, j + 1}, {l, r - 1}});
             }
             // 왼쪽
-            if(j > 1 && visited[i][j - 1] == 0 && l > 0 && board[i][j - 1] == '0') {
+            if(j > 1 && visited[i][j - 1] == 0 && l > 0 && board[i][j - 1] == 0) {
                 ppq.push({{i, j - 1}, {l - 1, r}});
             }
         }
