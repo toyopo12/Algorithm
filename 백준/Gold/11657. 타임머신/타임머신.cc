@@ -36,6 +36,9 @@ void bf(int start){
 }
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
     cin >> N >> M;
     for(int i = 1; i <= N; i++) dist[i] = 0x7fffffff;
     for(int i = 0; i < M; i++) {
