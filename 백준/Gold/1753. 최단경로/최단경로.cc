@@ -4,47 +4,42 @@
 
 using namespace std;
 
+vector<pair<int, int>> graph[20020];
 int d[20020];
-vector<pair<int,int>> v[20020];
-priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
+int N, E, K;
 
-void di(){
-    while(!pq.empty()){
-        int x = pq.top().first;
-        int y = pq.top().second;
+void dijkstra() {
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
+    for(int i = 1; i <= N; i++) d[i] = 3000030;
+    d[K] = 0;
+    pq.push({0, K});
+    while(!pq.empty()) {
+        auto [a, b] = pq.top();
         pq.pop();
-        if(x!=d[y]) continue;
-        for(int i = 0; i < v[y].size(); i++){
-            int a = v[y][i].first;
-            int b = v[y][i].second;
-            if(d[b] > x + a){
-                d[b] = x + a;
-                pq.push({d[b],b});
+        if(a != d[b]) continue;
+        for(int i = 0; i < graph[b].size(); i++) {
+            auto [x, y] = graph[b][i];
+            if(d[y] > a + x) {
+                d[y] = a + x;
+                pq.push({d[y], y});
             }
         }
     }
 }
 
-int main()
-{
-    ios_base :: sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    int n,m,start;
-    cin >> n >> m >> start;
-    for(int i = 0; i < m; i++){
-        int x,y,cost;
-        cin >> x >> y >> cost;
-        v[x].push_back({cost,y});
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    cin >> N >> E >> K;
+    for(int i = 0; i < E; i++) {
+        int u, v, w; cin >> u >> v >> w;
+        graph[u].push_back({w, v});
     }
-    for(int i = 1; i <= n; i++) d[i] = 0x7fffffff;
-    d[start] = 0;
-    pq.push({0,start});
-    di();
-    for(int i = 1; i <= n; i++){
-        if(d[i] == 0x7fffffff) cout << "INF";
-        else cout << d[i];
-        cout << '\n';
+    dijkstra();
+    for(int i = 1; i <= N; i++) {
+        if(d[i] >= 3000030) cout << "INF\n";
+        else cout << d[i] << '\n';
     }
     return 0;
 }
