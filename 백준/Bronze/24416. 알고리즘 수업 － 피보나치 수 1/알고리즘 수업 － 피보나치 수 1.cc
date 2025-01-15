@@ -2,25 +2,17 @@
 
 using namespace std;
 
-long long dd;
+long long arr[44];
+int n;
 
-int fib(int n)
-{
-    if(n == 1 || n== 2){
-        dd++;
-        return 1;
-    }
-    return fib(n - 1) + fib(n - 2);
-}
-
-int main()
-{
-    ios_base :: sync_with_stdio(false);
+int main() {
+    ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    cin.tie(nullptr);
-    int n;
+    cout.tie(nullptr);
     cin >> n;
-    fib(n);
-    cout << dd << " " << n - 2;
+    arr[1] = 1;
+    arr[2] = 1;
+    for(int i = 3; i <= n; i++) arr[i] = arr[i - 1] + arr[i - 2];
+    cout << arr[n] << " " << n - 2;
     return 0;
 }
